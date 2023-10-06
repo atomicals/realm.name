@@ -12,9 +12,7 @@ export function ClaimPage() {
         <meta name="description" content="Realm name system powered by Bitcoin" />
       </Helmet>
       <NavBarNew />
-     
       <ClaimView />
-        
     </>
   );
 }

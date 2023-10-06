@@ -21,7 +21,7 @@ export function* getRepos() {
   let client: ElectrumApiInterface;
   let apiMock: ElectrumApiInterface | undefined = undefined
   if (process.env.REACT_APP_ELECTRUMX_API_MOCK === 'true') {
-    if (name == 'notfound') {
+    if (name === 'notfound') {
       apiMock = mockSearchRealmNameAndStatus(true)
     } else {
       apiMock = mockSearchRealmNameAndStatus()

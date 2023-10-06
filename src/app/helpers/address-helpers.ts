@@ -1,6 +1,5 @@
 import * as bs58check from 'bs58check';
 import { sha256 } from 'js-sha256';
-import * as bip39 from 'bip39';
 var Buffer = require('buffer/').Buffer; // note: the trailing slash is important!
 window['Buffer'] = window['Buffer'] || Buffer;
 window['bitcoin'] = window['bitcoin'] || {};

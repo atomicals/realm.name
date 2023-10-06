@@ -10,3 +10,13 @@ export class ElectrumApiFactory {
     return ElectrumApi.createClient(this.url);
   }
 }
+
+export class ElectrumApiMockFactory {
+  constructor(private api: ElectrumApiInterface) {}
+  getMock() {
+    if (process.env.REACT_APP_ELECTRUMX_API_MOCK === 'true') {
+      return this.api;
+    }
+    return undefined;
+  }
+}

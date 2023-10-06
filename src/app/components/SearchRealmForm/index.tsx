@@ -43,19 +43,12 @@ export function SearchRealmForm({ redirectOnly, redirectPath }: Props) {
   const error = useSelector(selectError);
   const dispatch = useDispatch();
   const globalSlice = useAppGlobalStateSlice();
- 
+
   const primaryAddress = useSelector(selectPrimaryAddress);
-
-  function gotoConnect() {
-    navigate('/_wallet');
-  }
-
-  function isLoggedIn() {
-    return primaryAddress;
-  }
 
   const onChangeName = (evt: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(actions.changeName(evt.currentTarget.value));
+    dispatch(actions.clearError());
   };
 
   const onSearchName = () => {
@@ -63,10 +56,9 @@ export function SearchRealmForm({ redirectOnly, redirectPath }: Props) {
       navigate({
         pathname: redirectPath as any,
         search: `?${createSearchParams({
-          q: name
+          q: name,
         })}`,
       });
-
     } else {
       dispatch(actions.loadRepos());
     }
@@ -84,7 +76,7 @@ export function SearchRealmForm({ redirectOnly, redirectPath }: Props) {
     }
     const q = searchParams.get('q');
     if (q) {
-      console.log('q', q, name)
+      console.log('q', q, name);
       dispatch(actions.changeName(q));
       dispatch(actions.loadRepos());
     }

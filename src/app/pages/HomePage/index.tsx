@@ -11,10 +11,10 @@ export function HomePage() {
         <title>+Realm Names</title>
         <meta name="description" content="Realm name system powered by" />
       </Helmet>
-      <NavBarNew/>
+      <NavBarNew />
       <div>
-      <HomeView />
-      <FooterBasic />
+        <HomeView />
+        <FooterBasic />
       </div>
     </>
   );

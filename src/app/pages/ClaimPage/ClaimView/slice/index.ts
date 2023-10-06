@@ -18,23 +18,10 @@ const slice = createSlice({
     loadRealms(state, action: PayloadAction<string>) {
       state.loading = true;
       state.error = null;
-      //state.realms = [];
     },
-    reposLoaded(state) {
-     /* const repos = action.payload;
-      state.realms = repos;
-      state.loading = false;*/
-    },
-    repoError(state, action: PayloadAction<ClaimViewErrorType>) {
-      // state.error = action.payload;
-      // state.realmInfo = null;
-      // state.loading = false;
-    },
-    realmInfoLoaded(state, action: PayloadAction<Repo[]>) {
-      // const realmInfo: any = action.payload;
-      // state.realmInfo = realmInfo.result;
-      // state.loading = false;
-    },
+    reposLoaded(state) {},
+    repoError(state, action: PayloadAction<ClaimViewErrorType>) {},
+    realmInfoLoaded(state, action: PayloadAction<Repo[]>) {},
   },
 });
 

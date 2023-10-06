@@ -21,6 +21,9 @@ const slice = createSlice({
       state.realmInfo = null;
       state.name = action.payload;
     },
+    clearError(state) {
+      state.error = null;
+    },
     loadRepos(state) {
       state.loading = true;
       state.error = null;

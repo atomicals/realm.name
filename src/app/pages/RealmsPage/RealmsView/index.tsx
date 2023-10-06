@@ -1,23 +1,17 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { useSelector, useDispatch } from 'react-redux';
-import { FormLabel } from 'app/components/FormLabel';
 import { TextButton } from './components/TextButton';
 import { selectRealms } from './slice/selectors';
 import { useRealmsViewSlice } from './slice';
 import { FooterBasic } from 'app/components/FooterBasic';
 import { selectPrimaryAddress } from 'app/slice/selectors';
- 
 
 export function RealmsView() {
   const { actions } = useRealmsViewSlice();
   const realms = useSelector(selectRealms);
   const primaryAddress = useSelector(selectPrimaryAddress);
   const dispatch = useDispatch();
- 
-  const onRefresh = () => {
-    dispatch(actions.loadRealms(primaryAddress as any));
-  };
 
   const useEffectOnMount = (effect: React.EffectCallback) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps

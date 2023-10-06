@@ -4,14 +4,20 @@ import { RootState } from 'types';
 import { initialState } from '.';
 
 // First select the relevant part from the state
-const selectDomain = (state: RootState) => state.realmsViewState || initialState;
+const selectDomain = (state: RootState) => state.nftMinterState || initialState;
+
+export const selectName = createSelector(
+  [selectDomain],
+  githubRepoFormState => githubRepoFormState.name
+);
 
 export const selectLoading = createSelector(
   [selectDomain],
-  profileViewState => profileViewState.loading
+  githubRepoFormState => githubRepoFormState.loading
 );
 
 export const selectError = createSelector(
   [selectDomain],
-  profileViewState => profileViewState.error
+  githubRepoFormState => githubRepoFormState.error
 );
+ 

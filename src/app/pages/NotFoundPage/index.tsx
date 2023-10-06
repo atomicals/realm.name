@@ -15,13 +15,7 @@ export function NotFoundPage() {
       </Helmet>
       <NavBar />
       <Wrapper>
-        <Title>
-          4
-          <span role="img" aria-label="Crying Face">
-            😢
-          </span>
-          4
-        </Title>
+        <Title>404</Title>
         <P>Page not found.</P>
         <Link to={process.env.PUBLIC_URL + '/'}>Return to Home Page</Link>
       </Wrapper>

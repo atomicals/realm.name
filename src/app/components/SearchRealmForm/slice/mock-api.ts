@@ -1,7 +1,8 @@
 import { ElectrumApiMock } from 'services/electrum-api-mock';
 
-export const mockSearchRealmNameAndStatus = (notFound: boolean = false): any => {
+export const getMockApi = (notFound: boolean = false): any => {
   const setState = {
+    global: {},
     result: {
       atomical_id: '7800d90adfce58eef284115ffa813d105153ed4a757f130d76c50269dc9c34cdi0',
       atomical_number: 5885,
@@ -99,18 +100,48 @@ export const mockSearchRealmNameAndStatus = (notFound: boolean = false): any => 
           address: 'bc1pruqtlfvzs2zvdlqkhqxwaguwxrz25xnt3qpvlm2y8dsrfm4mr8xq7t85dg',
         },
       ],
-
+      location_info_obj: {
+        locations: [
+          {
+            location: '8ba60a403cfe891cec00ba9879628be9f51e969c920609f5924ec95ef876965fi0',
+            txid: '8ba60a403cfe891cec00ba9879628be9f51e969c920609f5924ec95ef876965f',
+            index: 0,
+            scripthash: '34801e5e6a8c09c72bcb951acd05dd9a7a943d838e665683e6a3cc2f4243bd20',
+            value: 1000,
+            script: '51201f00bfa5828284c6fc16b80ceea38e30c4aa1a6b8802cfed443b6034eebb19cc',
+            atomicals_at_location: [
+              '7800d90adfce58eef284115ffa813d105153ed4a757f130d76c50269dc9c34cdi0',
+            ],
+            tx_num: 901395985,
+            address: 'bc1pruqtlfvzs2zvdlqkhqxwaguwxrz25xnt3qpvlm2y8dsrfm4mr8xq7t85dg',
+          },
+        ],
+      },
       location_info_count: 1,
     },
   };
 
   const client = new ElectrumApiMock();
-  client.setGetStateCallback(() => {
+  client.setAtomicalsGetLocationCallback(() => {
     return setState;
   });
 
-  if (!notFound) {
-    client.setGetRealmInfoCallback(() => {
+  client.setGetRealmInfoCallback((realm: string) => {
+    if (realm === 'notfound') {
+      return {
+        result: {
+          atomical_id: null,
+          top_level_realm_atomical_id: null,
+          top_level_realm_name: null,
+          nearest_parent_realm_atomical_id: null,
+          nearest_parent_realm_name: null,
+          request_full_realm_name: 'hal',
+          found_full_realm_name: null,
+          missing_name_parts: 'hal',
+          candidates: []
+        },
+      };
+    } else {
       return {
         result: {
           atomical_id: '7800d90adfce58eef284115ffa813d105153ed4a757f130d76c50269dc9c34cdi0',
@@ -148,23 +179,8 @@ export const mockSearchRealmNameAndStatus = (notFound: boolean = false): any => 
           nearest_parent_realm_subrealm_mint_allowed: false,
         },
       };
-    });
-  } else {
-    client.setGetRealmInfoCallback(() => {
-      return {
-        result: {
-          atomical_id: null,
-          top_level_realm_atomical_id: null,
-          top_level_realm_name: null,
-          nearest_parent_realm_atomical_id: null,
-          nearest_parent_realm_name: null,
-          request_full_realm_name: 'hal',
-          found_full_realm_name: null,
-          missing_name_parts: 'hal',
-          candidates: [],
-        },
-      };
-    });
-  }
+    }
+  });
+
   return client;
 };

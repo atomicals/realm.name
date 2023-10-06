@@ -1,27 +1,12 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { useSelector, useDispatch } from 'react-redux';
-import { FormLabel } from 'app/components/FormLabel';
-import { Input } from './components/Input';
-import { RepoItem } from './RepoItem';
-import { SubTitle } from '../../components/SubTitle';
 import { TextButton } from './components/TextButton';
-import { QRCodeSVG } from 'qrcode.react';
-import {
-  selectName,
-  selectRepos,
-  selectLoading,
-  selectError,
-  selectRealmInfo,
-} from './slice/selectors';
-import { LoadingIndicator } from 'app/components/LoadingIndicator';
+import { selectError, selectRealmInfo } from './slice/selectors';
 import { ProfileErrorType } from './slice/types';
 import { useProfileOverviewSlice } from './slice';
-import { ButtonPrimaryNew } from 'app/components/ButtonPrimaryNew';
-import { InputSearchRealms } from './InputSearchRealms';
 import { NotFoundInfo } from './NotFoundInfo';
-import { A } from 'app/components/A';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Title } from '../../components/Title';
 import { FooterBasic } from 'app/components/FooterBasic';
 import { RealmInfo } from 'app/components/RealmInfo';
@@ -34,9 +19,7 @@ export function ProfileOverview() {
   const error = useSelector(selectError);
   const { name }: any = useParams();
   const dispatch = useDispatch();
-
   const primaryAddress = useSelector(selectPrimaryAddress);
-
   const useEffectOnMount = (effect: React.EffectCallback) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(effect, []);
@@ -54,16 +37,7 @@ export function ProfileOverview() {
     }
     return '';
   };
-
-  const address = () => {
-    if (realmInfo) {
-      return realmInfo?.location_info[0].address
-        ? realmInfo?.location_info[0].address
-        : undefined;
-    }
-    return '';
-  };
-
+ 
   return (
     <Wrapper>
       {realmInfo ? (
@@ -77,9 +51,9 @@ export function ProfileOverview() {
         </>
       ) : error ? (
         <div className="mt-5">
-        <NotFoundInfo>
-          <FirstClaimBox name={name} primaryAddress={primaryAddress} />
-        </NotFoundInfo>
+          <NotFoundInfo>
+            <FirstClaimBox name={name} primaryAddress={primaryAddress} />
+          </NotFoundInfo>
         </div>
       ) : null}
       <FooterBasic />
@@ -115,4 +89,3 @@ const Wrapper = styled.div`
     font-size: 0.875rem;
   }
 `;
- 

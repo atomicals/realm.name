@@ -39,9 +39,7 @@ openSansObserver.load().then(() => {
 });
 
 const store = configureAppStore();
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement,
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
   <Provider store={store}>
@@ -52,7 +50,7 @@ root.render(
         </React.StrictMode>
       </HelmetProvider>
     </ThemeProvider>
-  </Provider>,
+  </Provider>
 );
 
 // Hot reloadable translation json files

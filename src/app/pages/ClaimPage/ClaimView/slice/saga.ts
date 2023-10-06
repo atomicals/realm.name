@@ -24,7 +24,6 @@ export function* getRealms() {
   yield client.open();
   try {
     const atomicalInfo = yield client.atomicalsByScripthash(scripthash);
-    console.log('atomicalInfo', atomicalInfo);
     yield put(actions.realmInfoLoaded(atomicalInfo));
   } catch (err: any) {
     if (err.response?.status === 404) {

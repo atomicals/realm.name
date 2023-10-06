@@ -1,9 +1,7 @@
 import { put, select, takeLatest, delay } from 'redux-saga/effects';
 import { profileOverviewActions as actions } from '.';
 import { RealmsViewErrorType } from './types';
-import { ElectrumApiInterface } from 'services/electrum-api.interface';
 import { ElectrumApiFactory } from 'services/electrum-api-factory';
-import { mockSearchRealmNameAndStatus } from './mocks';
 import { selectPrimaryAddress } from 'app/slice/selectors';
 import { detectAddressTypeToScripthash } from 'app/helpers/address-helpers';
 

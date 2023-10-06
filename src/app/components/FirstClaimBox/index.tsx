@@ -4,6 +4,7 @@ import { A } from 'app/components/A';
 import { FormLabel } from 'app/components/FormLabel';
 import { ButtonPrimaryNew } from '../ButtonPrimaryNew';
 import { useNavigate } from 'react-router-dom';
+import { NftMinter } from '../NftMinter';
 
 interface Props {
   primaryAddress: any;
@@ -12,13 +13,18 @@ interface Props {
 
 export function FirstClaimBox({ primaryAddress, name }: Props) {
   const navigate = useNavigate();
-
+  const [isOpenMinter, setOpenMinter] = React.useState(false);
   function gotoConnect() {
     navigate('/_wallet');
   }
 
   function isLoggedIn() {
     return primaryAddress;
+  }
+
+  function openMinter(evt) {
+    setOpenMinter(!isOpenMinter);
+    evt.preventDefault();
   }
 
   return (
@@ -30,25 +36,32 @@ export function FirstClaimBox({ primaryAddress, name }: Props) {
           Realm <Highlight>+{name}</Highlight> is still available to claim!
         </LeadClaim>
         <LeadClaim className="text-center"></LeadClaim>
-        <Lead>
-          Connect your wallet and be the first to claim the Realm before someone else takes it.
-        </Lead>
-
         {!isLoggedIn() && (
-          <ButtonPrimaryNew block={false} onClick={gotoConnect}>
-            Connect Wallet
-          </ButtonPrimaryNew>
+          <Lead>
+            Connect your wallet and be the first to claim the Realm before someone else takes it.
+          </Lead>
         )}
-        {isLoggedIn() && (
-          <ButtonPrimaryNew block={false} onClick={gotoConnect}>
-            Coming very soon
-          </ButtonPrimaryNew>
+
+        {isOpenMinter && <NftMinter />}
+        {!isOpenMinter && (
+          <>
+            {!isLoggedIn() && (
+              <ButtonPrimaryNew block={false} onClick={gotoConnect}>
+                Connect Wallet
+              </ButtonPrimaryNew>
+            )}
+            {isLoggedIn() && (
+              <ButtonPrimaryNew block={false} onClick={openMinter}>
+                Mint Realm
+              </ButtonPrimaryNew>
+            )}
+            <div className="text-center my-3">
+              <A href="https://docs.atomicals.xyz/realm-names" target="_blank">
+                ...or claim Realm with the CLI instead
+              </A>
+            </div>
+          </>
         )}
-        <div className="text-center my-3">
-          <A href="https://docs.atomicals.xyz/realm-names" target="_blank">
-            ...or claim Realm with the CLI instead
-          </A>
-        </div>
       </FormGroupClaim>
     </Wrapper>
   );

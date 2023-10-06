@@ -19,15 +19,13 @@ export const toXOnly = publicKey => {
 };
 
 export interface CreateKeyPairInterface {
- 
-        address: string;
-        publicKey: string;
-        publicKeyXOnly: string;
-        path: string;
-        WIF: string;
-        privateKey: string;
-       // tweakedChildNode: string;
- 
+    address: string;
+    publicKey: string;
+    publicKeyXOnly: string;
+    path: string;
+    WIF: string;
+    privateKey: string;
+    // tweakedChildNode: string;
 };
 
 export const createKeyPair = async (
